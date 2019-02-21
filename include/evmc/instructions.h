@@ -47,6 +47,10 @@ enum evmc_opcode
     OP_SAR = 0x1d,
 
     OP_SHA3 = 0x20,
+    OP_FMUL = 0x2a,
+    OP_SFMUL = 0x2b,
+    OP_FDIV = 0x2c,
+    OP_SFDIV = 0x2d,
 
     OP_ADDRESS = 0x30,
     OP_BALANCE = 0x31,
@@ -153,6 +157,13 @@ enum evmc_opcode
     OP_LOG2 = 0xa2,
     OP_LOG3 = 0xa3,
     OP_LOG4 = 0xa4,
+
+    OP_SADD = 0xc0,
+    OP_UADD = 0xc1,
+    OP_SSUB = 0xc2,
+    OP_USUB = 0xc3,
+    OP_SMUL = 0xc4,
+    OP_UMUL = 0xc5,
 
     OP_CREATE = 0xf0,
     OP_CALL = 0xf1,
