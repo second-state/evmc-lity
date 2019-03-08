@@ -1,6 +1,6 @@
 // EVMC: Ethereum Client-VM Connector API.
-// Copyright 2018 Pawel Bylica.
-// Licensed under the MIT License. See the LICENSE file.
+// Copyright 2018 The EVMC Authors.
+// Licensed under the Apache License, Version 2.0. See the LICENSE file.
 
 #include <evmc/instructions.h>
 
@@ -87,6 +87,29 @@ TEST(instructions, byzantium_hard_fork)
     EXPECT_EQ(bn[OP_STATICCALL], std::string{"STATICCALL"});
     EXPECT_EQ(sdn[OP_STATICCALL], nullptr);
 }
+
+TEST(instructions, constantinople_hard_fork)
+{
+    const auto c = evmc_get_instruction_metrics_table(EVMC_CONSTANTINOPLE);
+    const auto b = evmc_get_instruction_metrics_table(EVMC_BYZANTIUM);
+    const auto cn = evmc_get_instruction_names_table(EVMC_CONSTANTINOPLE);
+    const auto bn = evmc_get_instruction_names_table(EVMC_BYZANTIUM);
+
+    EXPECT_EQ(c[OP_CREATE2].gas_cost, 32000);
+    EXPECT_EQ(c[OP_CREATE2].num_stack_arguments, 4);
+    EXPECT_EQ(c[OP_CREATE2].num_stack_returned_items, 1);
+    EXPECT_EQ(b[OP_CREATE2].gas_cost, -1);
+    EXPECT_EQ(cn[OP_CREATE2], std::string{"CREATE2"});
+    EXPECT_EQ(bn[OP_CREATE2], nullptr);
+
+    EXPECT_EQ(c[OP_EXTCODEHASH].gas_cost, 400);
+    EXPECT_EQ(c[OP_EXTCODEHASH].num_stack_arguments, 1);
+    EXPECT_EQ(c[OP_EXTCODEHASH].num_stack_returned_items, 1);
+    EXPECT_EQ(b[OP_EXTCODEHASH].gas_cost, -1);
+    EXPECT_EQ(cn[OP_EXTCODEHASH], std::string{"EXTCODEHASH"});
+    EXPECT_EQ(bn[OP_EXTCODEHASH], nullptr);
+}
+
 
 TEST(instructions, name_gas_cost_equivalence)
 {

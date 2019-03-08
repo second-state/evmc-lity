@@ -1,6 +1,6 @@
 /* EVMC: Ethereum Client-VM Connector API.
- * Copyright 2018 Pawel Bylica.
- * Licensed under the MIT License. See the LICENSE file.
+ * Copyright 2018 The EVMC Authors.
+ * Licensed under the Apache License, Version 2.0. See the LICENSE file.
  */
 
 #include <evmc/instructions.h>
@@ -69,7 +69,7 @@ static const char* constantinople_names[256] = {
     /* 0x3c */ "EXTCODECOPY",
     /* 0x3d */ "RETURNDATASIZE",
     /* 0x3e */ "RETURNDATACOPY",
-    /* 0x3f */ NULL,
+    /* 0x3f */ "EXTCODEHASH",
     /* 0x40 */ "BLOCKHASH",
     /* 0x41 */ "COINBASE",
     /* 0x42 */ "TIMESTAMP",
@@ -251,7 +251,7 @@ static const char* constantinople_names[256] = {
     /* 0xf2 */ "CALLCODE",
     /* 0xf3 */ "RETURN",
     /* 0xf4 */ "DELEGATECALL",
-    /* 0xf5 */ NULL,
+    /* 0xf5 */ "CREATE2",
     /* 0xf6 */ NULL,
     /* 0xf7 */ NULL,
     /* 0xf8 */ NULL,

@@ -1,6 +1,6 @@
 # EVMC: Ethereum Client-VM Connector API.
-# Copyright 2018 Pawel Bylica.
-# Licensed under the MIT License. See the LICENSE file.
+# Copyright 2018 The EVMC Authors.
+# Licensed under the Apache License, Version 2.0. See the LICENSE file.
 
 cmake_minimum_required(VERSION 3.5)
 
@@ -10,25 +10,23 @@ if(TARGET evmc)
 endif()
 
 option(EVMC_TESTING "Build EVMC tests and test tools" OFF)
-option(EVMC_EXAMPLES "Build EVMC examples" OFF)
+option(EVMC_EXAMPLES "Build EVMC examples" ${EVMC_TESTING})
 option(HUNTER_ENABLED "Enable Hunter package manager support" "${EVMC_TESTING}")
 
 include(cmake/cable/bootstrap.cmake)
+include(CableBuildType)
 include(CableCompilerSettings)
+include(CMakePackageConfigHelpers)
 include(HunterGate)
 include(GNUInstallDirs)
 include(defaults/HunterCacheServers)
 
-# Setup Hunter.
-# Hunter is going to be initialized only if building with tests,
-# where it is needed to get dependencies.
-HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.20.37.tar.gz"
-    SHA1 "51886d10428c924cc21756abc17623bcf4986386"
-)
+include(HunterConfig)
 
 project(evmc)
-set(PROJECT_VERSION "0.1.0.dev0")
+set(PROJECT_VERSION 6.0.0)
+
+cable_set_build_type(DEFAULT Release CONFIGURATION_TYPES Debug Release)
 
 cable_configure_compiler(NO_STACK_PROTECTION)
 
@@ -36,7 +34,8 @@ set(include_dir ${PROJECT_SOURCE_DIR}/include)
 
 add_library(evmc INTERFACE)
 add_library(evmc::evmc ALIAS evmc)
-target_include_directories(evmc INTERFACE ${include_dir})
+target_include_directories(evmc INTERFACE $<BUILD_INTERFACE:${include_dir}>$<INSTALL_INTERFACE:include>)
+install(TARGETS evmc EXPORT evmcTargets)
 
 install(DIRECTORY include/evmc DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
@@ -47,10 +46,29 @@ if(EVMC_TESTING)
     add_subdirectory(test)
 endif()
 
-if(EVMC_EXAMPLES)
+if(EVMC_EXAMPLES OR EVMC_TESTING)
     add_subdirectory(examples)
 endif()
 
+write_basic_package_version_file(evmcConfigVersion.cmake COMPATIBILITY ExactVersion)
+
+configure_package_config_file(
+    cmake/Config.cmake.in
+    evmcConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/evmc
+)
+
+install(
+    EXPORT evmcTargets
+    NAMESPACE evmc::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/evmc
+)
+install(
+    FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/evmcConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/evmcConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/evmc
+)
 
 if(WIN32)
     set(CPACK_GENERATOR ZIP)

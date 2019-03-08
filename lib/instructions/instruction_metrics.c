@@ -1,6 +1,6 @@
 /* EVMC: Ethereum Client-VM Connector API.
- * Copyright 2018 Pawel Bylica.
- * Licensed under the MIT License. See the LICENSE file.
+ * Copyright 2018 The EVMC Authors.
+ * Licensed under the Apache License, Version 2.0. See the LICENSE file.
  */
 
 #include <evmc/instructions.h>
@@ -85,7 +85,7 @@ static struct evmc_instruction_metrics constantinople_metrics[256] = {
     /*    EXTCODECOPY = 0x3c */ {700, 4, 0},
     /* RETURNDATASIZE = 0x3d */ {BASE, 0, 1},
     /* RETURNDATACOPY = 0x3e */ {VERYLOW, 3, 0},
-    /*                = 0x3f */ {UNDEFINED, 0, 0},
+    /*    EXTCODEHASH = 0x3f */ {400, 1, 1},
     /*      BLOCKHASH = 0x40 */ {20, 1, 1},
     /*       COINBASE = 0x41 */ {BASE, 0, 1},
     /*      TIMESTAMP = 0x42 */ {BASE, 0, 1},
@@ -267,7 +267,7 @@ static struct evmc_instruction_metrics constantinople_metrics[256] = {
     /*       CALLCODE = 0xf2 */ {700, 7, 1},
     /*         RETURN = 0xf3 */ {ZERO, 2, 0},
     /*   DELEGATECALL = 0xf4 */ {700, 6, 1},
-    /*                = 0xf5 */ {UNDEFINED, 0, 0},
+    /*        CREATE2 = 0xf5 */ {32000, 4, 1},
     /*                = 0xf6 */ {UNDEFINED, 0, 0},
     /*                = 0xf7 */ {UNDEFINED, 0, 0},
     /*                = 0xf8 */ {UNDEFINED, 0, 0},

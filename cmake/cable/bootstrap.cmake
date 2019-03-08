@@ -2,22 +2,21 @@
 # Copyright 2018 Pawel Bylica.
 # Licensed under the Apache License, Version 2.0. See the LICENSE file.
 
-# Bootstrap the Cable - CMake Boostrap Library by including this file.
+# Bootstrap the Cable - CMake Bootstrap Library by including this file.
 # e.g. include(cmake/cable/bootstrap.cmake).
 
 
 # Cable version.
 #
-# This is internal variable automaticaly updated with external tools.
+# This is internal variable automatically updated with external tools.
 # Use CABLE_VERSION variable if you need this information.
-set(version 0.2.2)
+set(version 0.2.14)
 
-# For conveniance, add the project CMake module dir to module path.
+# For convenience, add the project CMake module dir to module path.
 set(module_dir ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 if(EXISTS ${module_dir})
     list(APPEND CMAKE_MODULE_PATH ${module_dir})
 endif()
-
 
 if(CABLE_VERSION)
     # Some other instance of Cable was initialized in the top project.
@@ -25,7 +24,7 @@ if(CABLE_VERSION)
     # Compare versions of the top project and this instances.
     if(CABLE_VERSION VERSION_LESS version)
         set(severity WARNING)
-        set(comment "vesion older than ${version}")
+        set(comment "version older than ${version}")
     elseif(CABLE_VERSION VERSION_EQUAL version)
         set(severity STATUS)
         set(comment "same version")
@@ -45,7 +44,7 @@ if(CABLE_VERSION)
 
     message(
         ${severity}
-        "[cable ] Parent Cable ${CABLE_VERSION} (${comment}) initialized in `${cable_top_project_name}` project"
+        "[cable ] Cable ${CABLE_VERSION} (${comment}) initialized in the `${cable_top_project_name}` parent project"
     )
     cable_debug("Project CMake modules directory: ${module_dir}")
 

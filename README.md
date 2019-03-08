@@ -5,9 +5,9 @@
 
 > Ethereum Client-VM Connector API
 
-The EVMC is the low-level ABI between Ethereum Virtual Machines (EVMs) and 
-Ethereum Clients. On the EVM-side it supports classic EVM1 and [eWASM].
-On the Client-side it defines the interface for EVM implementations 
+The EVMC is the low-level ABI between Ethereum Virtual Machines (EVMs) and
+Ethereum Clients. On the EVM side it supports classic EVM1 and [ewasm].
+On the Client-side it defines the interface for EVM implementations
 to access Ethereum environment and state.
 
 ## Usage
@@ -18,16 +18,17 @@ Please visit the [documentation].
 
 ### EVMs
 
+- [aleth-interpreter]
 - [evmjit]
 - [Hera]
-- "[interpreter]"
 
 ### Clients
 
-- [cpp-ethereum]
-- [nim-evmjit]
+- [aleth]
+- [nim-evmc]
 - [go-ethereum] (in progress)
 - [pyevm] (in progress)
+- [pyethereum] (abandoned)
 
 ## Contribute
 
@@ -40,23 +41,26 @@ Talk with us on the [EVMC Gitter chat][Gitter].
 - Alex Beregszaszi [@axic]
 - Paweł Bylica [@chfast]
 
+See also the list of [EVMC Authors](AUTHORS.md).
+
 ## License
 
-Licensed under the [MIT License](LICENSE.md).
+Licensed under the [MIT License](LICENSE).
 
 
 [@axic]: https://github.com/axic
 [@chfast]: https://github.com/chfast
 [documentation]: https://ethereum.github.io/evmc
-[eWASM]: https://github.com/ewasm/design#ethereum-flavored-webassembly-ewasm-design
+[ewasm]: https://github.com/ewasm/design
 [evmjit]: https://github.com/ethereum/evmjit
 [Hera]: https://github.com/ewasm/hera
 [Gitter]: https://gitter.im/ethereum/evmc
-[interpreter]: https://github.com/ethereum/cpp-ethereum/blob/develop/libevm/VM.cpp
-[cpp-ethereum]: https://github.com/ethereum/cpp-ethereum
-[nim-evmjit]: https://github.com/status-im/nim-evmjit
-[go-ethereum]: https://github.com/ethereum/go-ethereum
-[pyevm]: https://github.com/ethereum/cpp-ethereum
+[aleth-interpreter]: https://github.com/ethereum/aleth/tree/master/libaleth-interpreter
+[aleth]: https://github.com/ethereum/aleth
+[nim-evmc]: https://github.com/status-im/nim-evmc
+[go-ethereum]: https://github.com/ethereum/go-ethereum/pull/17050
+[pyevm]: https://github.com/ethereum/py-evm
+[pyethereum]: https://github.com/ethereum/pyethereum/pull/406
 [standard readme]: https://github.com/RichardLitt/standard-readme
 
 [gitter badge]: https://img.shields.io/gitter/room/ethereum/evmc.svg?style=flat-square

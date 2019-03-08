@@ -1,24 +1,15 @@
 # EVMC: Ethereum Client-VM Connector API.
-# Copyright 2018 Pawel Bylica.
-# Licensed under the MIT License. See the LICENSE file.
+# Copyright 2018 The EVMC Authors.
+# Licensed under the Apache License, Version 2.0. See the LICENSE file.
 
 include(GNUInstallDirs)
 
-hunter_add_package(Boost COMPONENTS program_options filesystem system)
-find_package(Boost CONFIG REQUIRED program_options filesystem system)
+hunter_add_package(CLI11)
+find_package(CLI11)
 
 add_executable(evmc-vmtester vmtester.hpp vmtester.cpp tests.cpp)
-
-target_link_libraries(
-    evmc-vmtester
-    PRIVATE
-    evmc
-    GTest::gtest
-    Boost::program_options
-    Boost::filesystem
-    Boost::system
-    ${CMAKE_DL_LIBS}
-)
+set_target_properties(evmc-vmtester PROPERTIES RUNTIME_OUTPUT_DIRECTORY ..)
+target_link_libraries(evmc-vmtester PRIVATE evmc loader evmc-example-host GTest::gtest CLI11::CLI11)
 
 install(TARGETS evmc-vmtester RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
