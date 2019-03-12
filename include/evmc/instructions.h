@@ -37,6 +37,9 @@ enum evmc_opcode
     OP_MULMOD = 0x09,
     OP_EXP = 0x0a,
     OP_SIGNEXTEND = 0x0b,
+    OP_SADD = 0xc,
+    OP_SSUB = 0xd,
+    OP_SMUL = 0xe,
 
     OP_LT = 0x10,
     OP_GT = 0x11,
@@ -165,13 +168,6 @@ enum evmc_opcode
     OP_LOG2 = 0xa2,
     OP_LOG3 = 0xa3,
     OP_LOG4 = 0xa4,
-
-    OP_SADD = 0xc0,
-    OP_UADD = 0xc1,
-    OP_SSUB = 0xc2,
-    OP_USUB = 0xc3,
-    OP_SMUL = 0xc4,
-    OP_UMUL = 0xc5,
 
     OP_CREATE = 0xf0,
     OP_CALL = 0xf1,
